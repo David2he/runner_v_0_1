@@ -1,0 +1,1 @@
+color_c_blend_monster = c_white;

@@ -1,0 +1,1 @@
+instance_destroy(Obj_monster_parrents);
