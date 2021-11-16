@@ -1,6 +1,6 @@
 /// select how many enemies can go to fight based on Obj_pj.max_enemies_stacked_in_fight values
 /// The other enemies wait in a queue to go in a fight (can be added = can go to fight)
-if(distance_to_object(Obj_pj) <= 120 + 40* queue && !can_be_added){
+if(distance_to_object(Obj_pj) <= 350 + 40* queue && !can_be_added){
 	for(var i = 0; i < Obj_pj.max_enemies_stacked_in_fight; i ++){
 		if(ds_grid_width(Obj_pj.monster_waiting_queue) > i){
 			with(ds_grid_get(Obj_pj.monster_waiting_queue, i, 0)){
@@ -10,13 +10,28 @@ if(distance_to_object(Obj_pj) <= 120 + 40* queue && !can_be_added){
 			}
 		}
 	}
+	//show_debug_message("---------------");
 	if(!can_be_added){
-		sprite_index = sprite_idle;
+		
+		for(var i = 0; i < ds_grid_width(Obj_pj.monster_waiting_queue); i ++){
+			if((ds_grid_width(Obj_pj.monster_waiting_queue) > i)){
+				if(ds_grid_get(Obj_pj.monster_waiting_queue, i, 0) == id){
+					with(ds_grid_get(Obj_pj.monster_waiting_queue, i, 0)){
+						if(x > (Obj_pj.x + 350) + 40* i){
+							x -= 9;
+							sprite_index = sprite_running;
+						} else {
+							sprite_index = sprite_idle;
+						}
+					}
+				}
+					
+			}
+		}	
 	}
+	//show_debug_message("---------------");
 } else {
-	if(distance_to_object(Obj_pj) <= 10){
-		//show_debug_message(ds_grid_width(Obj_pj.monster_in_fight_with));
-		is_in_the_area = false;
+	if(distance_to_object(Obj_pj) <= 20){	
 		if(!is_in_array){
 			alarm[0] = 1;
 			sprite_index = sprite_idle;
@@ -29,9 +44,13 @@ if(distance_to_object(Obj_pj) <= 120 + 40* queue && !can_be_added){
 
 
 
+	
+
+
+
 if(hitted){
-	color_c_blend_monster = c_red;
 	hitted = false;
+	color_c_blend_monster = c_red;
 	image_index = 0;
 	alarm[1] = room_speed * 0.15;
 	sprite_index = sprite_hurted;
@@ -59,5 +78,4 @@ if(is_dead){
 		instance_create_depth(x + sprite_width / 2, y - sprite_height, -2,Obj_loots);
 	}
 		instance_destroy();
-
 }
