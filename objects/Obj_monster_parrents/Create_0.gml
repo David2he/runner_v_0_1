@@ -8,12 +8,13 @@ color_c_blend_monster = c_white;
 sprite_running = undefined;
 sprite_idle = undefined;
 sprite_hurted = undefined;
+//sprite_die = undefined;
+
 ammount_of_gold = 0;
 
 is_in_the_area = false;
 queue = ds_grid_width(Obj_pj.monster_waiting_queue);
-queue_stop_pos_x = 120 + 40* queue;
-//sprite_die = undefined;
+
 
 
 can_be_added = 0;
