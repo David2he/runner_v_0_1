@@ -12,14 +12,12 @@ sprite_hurted = undefined;
 
 ammount_of_gold = 0;
 
-is_in_the_area = false;
 queue = ds_grid_width(Obj_pj.monster_waiting_queue);
-
 
 
 can_be_added = 0;
 is_in_array = false;
-
+monster_can_attack = false;
 
 ds_grid_resize(Obj_pj.monster_waiting_queue, ds_grid_width(Obj_pj.monster_waiting_queue)+1, 1);
 ds_grid_add(Obj_pj.monster_waiting_queue, ds_grid_width(Obj_pj.monster_waiting_queue)-1, 0, id);

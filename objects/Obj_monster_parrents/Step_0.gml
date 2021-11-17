@@ -10,9 +10,8 @@ if(distance_to_object(Obj_pj) <= 350 + 40* queue && !can_be_added){
 			}
 		}
 	}
-	//show_debug_message("---------------");
+
 	if(!can_be_added){
-		
 		for(var i = 0; i < ds_grid_width(Obj_pj.monster_waiting_queue); i ++){
 			if((ds_grid_width(Obj_pj.monster_waiting_queue) > i)){
 				if(ds_grid_get(Obj_pj.monster_waiting_queue, i, 0) == id){
@@ -29,22 +28,24 @@ if(distance_to_object(Obj_pj) <= 350 + 40* queue && !can_be_added){
 			}
 		}	
 	}
-	//show_debug_message("---------------");
+
 } else {
 	if(distance_to_object(Obj_pj) <= 20){	
 		if(!is_in_array){
 			alarm[0] = 1;
 			sprite_index = sprite_idle;
+			monster_can_attack = true;
+		} else {
+			if(monster_can_attack){
+				alarm[2] = 3* room_speed;
+				monster_can_attack = false;
+			}
 		}
 	} else {
 		x -= 9;
 		sprite_index = sprite_running;
 	}
 }
-
-
-
-	
 
 
 

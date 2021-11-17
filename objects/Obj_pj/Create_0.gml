@@ -12,6 +12,11 @@ image_yscale = 4 * global.scale_window;
 
 
 
+// LIFE
+max_hp = 100;
+current_hp = max_hp;
+armor = 5;
+
 /// MOVEMENT
 movement_speed = 1;
 curent_movement_speed = movement_speed;
@@ -40,17 +45,17 @@ current_damage = damage + movement_speed/5;;
 crit_rate = 0.2;
 crit_bonus_damage = 1.5;
 first_attack = true;
-attack_animation_speed = 1;
-
-
+attack_animation_speed = 4;
+cut_through_the_enemies = 1.25;
 check_os = 0;
+
 
 monster_waiting_queue = ds_grid_create(0, 0);
 monster_in_fight_with = ds_grid_create(0, 0);
-max_enemies_stacked_in_fight = 5;
+
 all_monster = [];
 
 how_many_enemies_dies_begin = 0;
 how_many_enemies_dies_last = 5;
 
-cut_through_the_enemies = 1.25;
+max_enemies_stacked_in_fight = 5;
