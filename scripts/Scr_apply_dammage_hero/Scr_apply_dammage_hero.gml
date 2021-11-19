@@ -19,9 +19,17 @@ function Scr_apply_dammage_hero(){
 		calc_damage = damage_against_player;
 	}
 	
+	var instance_damage_drawned = instance_create_depth(Obj_pj.middle_x_player, Obj_pj.y, -1, Obj_draw_damage_player);
+	instance_damage_drawned.ammount_damage = calc_damage;
+	instance_damage_drawned.draw_damage_color = c_white;
+	instance_damage_drawned.effect = 0;
+	
 	if(calc_damage >= player_current_hp){
 		Obj_pj.is_dead = true;
 	}
-	instance_create_depth(Obj_pj.x, Obj_pj.y, -1, Obj_draw_damage_player);
+	
 	Obj_pj.current_hp -= calc_damage ;
+	
+	
+	
 }

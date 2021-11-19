@@ -6,7 +6,12 @@ effect = 0;
 max_size_grow_up_ratio = 2;
 
 
-curve = animcurve_get_channel(AnimC_damage_text, "curve_damage_player");
+
+
+
+alarm[0] = room_speed * 0.5;
+curve = animcurve_get_channel(AnimC_damage_text, "curve" + string(irandom_range(0, 1)));
+curve_x = animcurve_get_channel(AnimC_damage_text, "curveX");
 percent = 0;
 
 

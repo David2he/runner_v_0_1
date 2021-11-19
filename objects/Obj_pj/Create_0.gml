@@ -7,10 +7,16 @@ depth = -2;
 x = (window_get_width() / 3) - sprite_width;
 y = global.ground_level - sprite_height * (4 * global.scale_window);
 
+
+middle_x_player = x + sprite_width / 2;
+show_debug_message(middle_x_player);
+
 image_xscale = 4 * global.scale_window;
 image_yscale = 4 * global.scale_window;
+show_debug_message("------");
 
-
+middle_x_player = x + sprite_width / 2;
+show_debug_message(middle_x_player);
 
 // LIFE
 max_hp = 100;
