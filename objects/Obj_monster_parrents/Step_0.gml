@@ -10,7 +10,6 @@ if(distance_to_object(Obj_pj) <= 350 + 40* queue && !can_be_added){
 			}
 		}
 	}
-
 	if(!can_be_added){
 		for(var i = 0; i < ds_grid_width(Obj_pj.monster_waiting_queue); i ++){
 			if((ds_grid_width(Obj_pj.monster_waiting_queue) > i)){
@@ -28,7 +27,6 @@ if(distance_to_object(Obj_pj) <= 350 + 40* queue && !can_be_added){
 			}
 		}	
 	}
-
 } else {
 	if(distance_to_object(Obj_pj) <= 20){	
 		if(!is_in_array){
@@ -37,7 +35,7 @@ if(distance_to_object(Obj_pj) <= 350 + 40* queue && !can_be_added){
 			monster_can_attack = true;
 		} else {
 			if(monster_can_attack){
-				alarm[2] = 3* room_speed;
+				alarm[2] = current_attack_speed * room_speed;
 				monster_can_attack = false;
 			}
 		}
@@ -48,13 +46,31 @@ if(distance_to_object(Obj_pj) <= 350 + 40* queue && !can_be_added){
 }
 
 
+if(start_attack_animation){
+	if((image_index >= srite_number_start_damage && image_index <= srite_number_end_damage) && hit > 0){
+		if(!Obj_pj.is_dead){
+			hit --;
+			Scr_apply_dammage_hero(damage_monster, Obj_pj.current_hp, Obj_pj.armor, Obj_pj.flat_armor, false);
+		}
+	}
+	if(image_index >= image_number - 1){
+		monster_can_attack = true;
+		hit = 1;
+		start_attack_animation = false;
+		sprite_index = sprite_idle;
+	}
+}
+
 
 if(hitted){
 	hitted = false;
 	color_c_blend_monster = c_red;
-	image_index = 0;
+
 	alarm[1] = room_speed * 0.15;
-	sprite_index = sprite_hurted;
+	if(!start_attack_animation){
+		image_index = 0;
+		sprite_index = sprite_hurted;
+	}
 	//show_debug_message("---");
 	//	show_debug_message(max_hp - current_hp);
 	//	show_debug_message(id);

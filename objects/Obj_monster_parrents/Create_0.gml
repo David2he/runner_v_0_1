@@ -8,6 +8,17 @@ color_c_blend_monster = c_white;
 sprite_running = undefined;
 sprite_idle = undefined;
 sprite_hurted = undefined;
+
+current_attack_speed = undefined;
+start_attack_animation = false;
+sprite_attack = undefined;
+damage_monster = undefined;
+srite_number_start_damage = undefined;
+srite_number_end_damage = undefined;
+hit = 1;
+
+
+
 //sprite_die = undefined;
 
 ammount_of_gold = 0;

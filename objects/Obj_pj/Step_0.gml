@@ -1,6 +1,6 @@
 
 /// check if instance exist and allow fight or not
-if(ds_grid_width(monster_in_fight_with > 0)){
+if(ds_grid_width(monster_in_fight_with > 0) && !is_dead){
 	is_fighting = true;
 } else {
 	is_fighting = false;
@@ -18,7 +18,6 @@ if(will_be_a_crit){
 
 
 if(ds_grid_width(monster_in_fight_with) > 0 && first_attack){
-
 	//show_debug_message(ds_grid_get(monster_in_fight_with, 0, 0));
 	with(ds_grid_get(monster_in_fight_with, 0, 0)){
 		Obj_pj.check_os = current_hp;
@@ -62,10 +61,40 @@ if(is_fighting){
 	} else if (curent_movement_speed < 0) curent_movement_speed = 0;
 		Scr_parralax_speed(false, 1080, curent_movement_speed);
 	
-} else {
-	reset_frame = true;
-	first_attack = true;
-	image_speed = run_animation_speed;
-	combo = 0;
-	Scr_parralax_speed(true, 1080, curent_movement_speed);
+} else{
+	 if(!is_dead){
+		reset_frame = true;
+		first_attack = true;
+		image_speed = run_animation_speed;
+		combo = 0;
+		Scr_parralax_speed(true, 1080, curent_movement_speed);
+	 }	
+}
+
+
+if(current_hp <= 0){
+	is_dead = true;
+}
+if(is_dead && !game_over){
+	if(reset_frame_death_allowed){
+		image_index = 0;
+		reset_frame_death_allowed = false;
+	}
+	sprite_index = Spr_player_die;
+	image_speed = 0.7;
+	curent_movement_speed = 0;
+	Scr_parralax_speed(false, 1080, curent_movement_speed);
+	if(image_index >= image_number - 1){
+		game_over = true;
+	}
+} 
+if(is_dead){
+	if(ratio_effect_death <= 1){
+		ratio_effect_death += 0.01;
+	}
+	fx_set_parameter(layer_get_fx("Effect_1"), "g_Intensity", ratio_effect_death);
+}
+
+if(game_over){
+	sprite_index = Spr_player_die_stuck;
 }

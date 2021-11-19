@@ -16,6 +16,10 @@ image_yscale = 4 * global.scale_window;
 max_hp = 100;
 current_hp = max_hp;
 armor = 5;
+flat_armor = 5;
+is_dead = false;
+
+game_over = false;
 
 /// MOVEMENT
 movement_speed = 1;
@@ -28,7 +32,6 @@ ground_speed = 0;
 /// STAT VALUES
 gold_earned = 0;
 current_gold = gold_earned;
-
 
 // VALUES HANDLE FIGHT
 reset_frame = true;
@@ -45,7 +48,7 @@ current_damage = damage + movement_speed/5;;
 crit_rate = 0.2;
 crit_bonus_damage = 1.5;
 first_attack = true;
-attack_animation_speed = 4;
+attack_animation_speed = 0.9;
 cut_through_the_enemies = 1.25;
 check_os = 0;
 
@@ -59,3 +62,10 @@ how_many_enemies_dies_begin = 0;
 how_many_enemies_dies_last = 5;
 
 max_enemies_stacked_in_fight = 5;
+
+
+
+
+/// GAME OVER CASE	
+ratio_effect_death = 0;
+reset_frame_death_allowed = true;
