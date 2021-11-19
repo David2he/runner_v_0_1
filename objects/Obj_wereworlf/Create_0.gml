@@ -3,9 +3,9 @@ sprite_running = Spr_werewolf_run;
 sprite_idle = Spr_werewolf_idle;
 sprite_hurted = Spr_werewolf_hurt;
 sprite_attack = Spr_werewolf_att;
-dammage = 10;
+damage_monster = 10;
 max_hp = 320;
-current_attack_speed = 2;
+current_attack_speed = 0.5;
 current_hp = max_hp
 
 

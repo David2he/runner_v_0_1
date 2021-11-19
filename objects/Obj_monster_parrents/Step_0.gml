@@ -49,13 +49,8 @@ if(distance_to_object(Obj_pj) <= 350 + 40* queue && !can_be_added){
 if(start_attack_animation){
 	if((image_index >= srite_number_start_damage && image_index <= srite_number_end_damage) && hit > 0){
 		if(!Obj_pj.is_dead){
-			if(dammage >= Obj_pj.current_hp){
-				Obj_pj.is_dead = true;
-				//Obj_pj.image_index = 0;
-				show_debug_message("is_dedd");
-			} 
-			Obj_pj.current_hp -= dammage;
 			hit --;
+			Scr_apply_dammage_hero(damage_monster, Obj_pj.current_hp, Obj_pj.armor, Obj_pj.flat_armor, false);
 		}
 	}
 	if(image_index >= image_number - 1){

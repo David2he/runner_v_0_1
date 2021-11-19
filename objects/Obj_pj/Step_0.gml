@@ -18,7 +18,6 @@ if(will_be_a_crit){
 
 
 if(ds_grid_width(monster_in_fight_with) > 0 && first_attack){
-
 	//show_debug_message(ds_grid_get(monster_in_fight_with, 0, 0));
 	with(ds_grid_get(monster_in_fight_with, 0, 0)){
 		Obj_pj.check_os = current_hp;

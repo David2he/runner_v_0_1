@@ -16,6 +16,7 @@ image_yscale = 4 * global.scale_window;
 max_hp = 100;
 current_hp = max_hp;
 armor = 5;
+flat_armor = 5;
 is_dead = false;
 
 game_over = false;
@@ -47,7 +48,7 @@ current_damage = damage + movement_speed/5;;
 crit_rate = 0.2;
 crit_bonus_damage = 1.5;
 first_attack = true;
-attack_animation_speed = 1.8;
+attack_animation_speed = 0.9;
 cut_through_the_enemies = 1.25;
 check_os = 0;
 
