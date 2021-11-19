@@ -7,9 +7,7 @@ function Scr_apply_damage(){
 	var damage = argument[2];
 	var c_effect = argument[3];
 	
-	
 	var damage_ratio = damage;
-	
 	
 	/// check if ds_grid is > 0 
 	///set a loop with a specific start and end (if u wants to apply damage on the first enemeis or the seond and both or all
@@ -30,7 +28,6 @@ function Scr_apply_damage(){
 					} else if(current_hp > 0){
 						current_hp -= damage_ratio;
 					}
-				
 				}
 				Scr_handle_damage_drawned(ds_grid_get(monster_in_fight_with, i, 0), damage_ratio, c_effect);
 			}

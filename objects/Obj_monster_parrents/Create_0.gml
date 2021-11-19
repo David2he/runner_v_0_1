@@ -8,17 +8,27 @@ color_c_blend_monster = c_white;
 sprite_running = undefined;
 sprite_idle = undefined;
 sprite_hurted = undefined;
+
+current_attack_speed = undefined;
+start_attack_animation = false;
+sprite_attack = undefined;
+damage_monster = undefined;
+srite_number_start_damage = undefined;
+srite_number_end_damage = undefined;
+hit = 1;
+
+
+
+//sprite_die = undefined;
+
 ammount_of_gold = 0;
 
-is_in_the_area = false;
 queue = ds_grid_width(Obj_pj.monster_waiting_queue);
-queue_stop_pos_x = 120 + 40* queue;
-//sprite_die = undefined;
 
 
 can_be_added = 0;
 is_in_array = false;
-
+monster_can_attack = false;
 
 ds_grid_resize(Obj_pj.monster_waiting_queue, ds_grid_width(Obj_pj.monster_waiting_queue)+1, 1);
 ds_grid_add(Obj_pj.monster_waiting_queue, ds_grid_width(Obj_pj.monster_waiting_queue)-1, 0, id);

@@ -1,1 +1,1 @@
-Obj_menu.show_menu = !Obj_menu.show_menu;
+current_hp -= 12;

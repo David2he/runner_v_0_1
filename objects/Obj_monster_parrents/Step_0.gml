@@ -1,6 +1,6 @@
 /// select how many enemies can go to fight based on Obj_pj.max_enemies_stacked_in_fight values
 /// The other enemies wait in a queue to go in a fight (can be added = can go to fight)
-if(distance_to_object(Obj_pj) <= 120 + 40* queue && !can_be_added){
+if(distance_to_object(Obj_pj) <= 350 + 40* queue && !can_be_added){
 	for(var i = 0; i < Obj_pj.max_enemies_stacked_in_fight; i ++){
 		if(ds_grid_width(Obj_pj.monster_waiting_queue) > i){
 			with(ds_grid_get(Obj_pj.monster_waiting_queue, i, 0)){
@@ -11,15 +11,33 @@ if(distance_to_object(Obj_pj) <= 120 + 40* queue && !can_be_added){
 		}
 	}
 	if(!can_be_added){
-		sprite_index = sprite_idle;
+		for(var i = 0; i < ds_grid_width(Obj_pj.monster_waiting_queue); i ++){
+			if((ds_grid_width(Obj_pj.monster_waiting_queue) > i)){
+				if(ds_grid_get(Obj_pj.monster_waiting_queue, i, 0) == id){
+					with(ds_grid_get(Obj_pj.monster_waiting_queue, i, 0)){
+						if(x > (Obj_pj.x + 350) + 40* i){
+							x -= 9;
+							sprite_index = sprite_running;
+						} else {
+							sprite_index = sprite_idle;
+						}
+					}
+				}
+					
+			}
+		}	
 	}
 } else {
-	if(distance_to_object(Obj_pj) <= 10){
-		//show_debug_message(ds_grid_width(Obj_pj.monster_in_fight_with));
-		is_in_the_area = false;
+	if(distance_to_object(Obj_pj) <= 20){	
 		if(!is_in_array){
 			alarm[0] = 1;
 			sprite_index = sprite_idle;
+			monster_can_attack = true;
+		} else {
+			if(monster_can_attack){
+				alarm[2] = current_attack_speed * room_speed;
+				monster_can_attack = false;
+			}
 		}
 	} else {
 		x -= 9;
@@ -28,13 +46,31 @@ if(distance_to_object(Obj_pj) <= 120 + 40* queue && !can_be_added){
 }
 
 
+if(start_attack_animation){
+	if((image_index >= srite_number_start_damage && image_index <= srite_number_end_damage) && hit > 0){
+		if(!Obj_pj.is_dead){
+			hit --;
+			Scr_apply_dammage_hero(damage_monster, Obj_pj.current_hp, Obj_pj.armor, Obj_pj.flat_armor, false);
+		}
+	}
+	if(image_index >= image_number - 1){
+		monster_can_attack = true;
+		hit = 1;
+		start_attack_animation = false;
+		sprite_index = sprite_idle;
+	}
+}
+
 
 if(hitted){
-	color_c_blend_monster = c_red;
 	hitted = false;
-	image_index = 0;
+	color_c_blend_monster = c_red;
+
 	alarm[1] = room_speed * 0.15;
-	sprite_index = sprite_hurted;
+	if(!start_attack_animation){
+		image_index = 0;
+		sprite_index = sprite_hurted;
+	}
 	//show_debug_message("---");
 	//	show_debug_message(max_hp - current_hp);
 	//	show_debug_message(id);
@@ -59,5 +95,4 @@ if(is_dead){
 		instance_create_depth(x + sprite_width / 2, y - sprite_height, -2,Obj_loots);
 	}
 		instance_destroy();
-
 }
