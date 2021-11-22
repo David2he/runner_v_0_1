@@ -5,6 +5,10 @@ if(effect == 1){
 }
 
 
+if(text_avaible){
+	ammount_damage = text;
+}
+
 if(percent > 1){
 	instance_destroy();
 } else {

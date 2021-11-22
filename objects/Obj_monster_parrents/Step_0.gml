@@ -71,10 +71,6 @@ if(hitted){
 		image_index = 0;
 		sprite_index = sprite_hurted;
 	}
-	//show_debug_message("---");
-	//	show_debug_message(max_hp - current_hp);
-	//	show_debug_message(id);
-	//show_debug_message("---");
 }
 
 if(sprite_index == sprite_hurted){

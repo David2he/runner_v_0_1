@@ -74,6 +74,7 @@ if(is_fighting){
 
 if(current_hp <= 0){
 	is_dead = true;
+	current_hp = 0;
 }
 if(is_dead && !game_over){
 	if(reset_frame_death_allowed){
@@ -98,3 +99,27 @@ if(is_dead){
 if(game_over){
 	sprite_index = Spr_player_die_stuck;
 }
+
+if(current_temp_hp > current_hp){
+	current_temp_hp -= 0.4;
+}
+
+if(current_hp > max_hp){
+	bonus_hp += current_hp - max_hp;
+	current_hp = max_hp;
+}
+
+if(bonus_hp > max_bonus_hp){
+	bonus_hp = max_bonus_hp;
+}
+
+
+ //////// test timer
+//if(start_timer){
+//	if(timer > 0){
+//		show_debug_message(timer);
+//		timer -- ;
+//	} else if(timer == 0){
+//		show_debug_message("test");
+//	}
+//}

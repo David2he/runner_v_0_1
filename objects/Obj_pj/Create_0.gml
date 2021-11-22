@@ -13,18 +13,22 @@ show_debug_message(middle_x_player);
 
 image_xscale = 4 * global.scale_window;
 image_yscale = 4 * global.scale_window;
-show_debug_message("------");
 
 middle_x_player = x + sprite_width / 2;
-show_debug_message(middle_x_player);
+
 
 // LIFE
 max_hp = 100;
 current_hp = max_hp;
-armor = 5;
+current_temp_hp = current_hp;
+armor = 10;
 flat_armor = 5;
-is_dead = false;
 
+bonus_hp = 0;
+allow_bonus_hp_decrease = false;
+max_bonus_hp = 30;
+
+is_dead = false;
 game_over = false;
 
 /// MOVEMENT
@@ -57,7 +61,7 @@ first_attack = true;
 attack_animation_speed = 0.9;
 cut_through_the_enemies = 1.25;
 check_os = 0;
-
+life_steal = 20;
 
 monster_waiting_queue = ds_grid_create(0, 0);
 monster_in_fight_with = ds_grid_create(0, 0);
@@ -75,3 +79,10 @@ max_enemies_stacked_in_fight = 5;
 /// GAME OVER CASE	
 ratio_effect_death = 0;
 reset_frame_death_allowed = true;
+
+
+
+
+ //////// test timer
+//start_timer = false;
+//timer = 10 * room_speed;

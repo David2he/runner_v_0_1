@@ -28,6 +28,24 @@ function Scr_apply_damage(){
 					} else if(current_hp > 0){
 						current_hp -= damage_ratio;
 					}
+					if(Obj_pj.life_steal > 0){
+						if((Obj_pj.current_hp + damage_ratio * (Obj_pj.life_steal / 100)) >= max_hp ){
+							Obj_pj.current_hp = max_hp;
+							if(Obj_pj.bonus_hp >= Obj_pj.max_bonus_hp){
+								Obj_pj.bonus_hp = Obj_pj.max_bonus_hp;
+							} else {
+								Obj_pj.bonus_hp += damage_ratio * (Obj_pj.life_steal / 100);
+							}
+						} else {
+							Obj_pj.current_hp += damage_ratio * (Obj_pj.life_steal / 100);
+						}
+			
+						var instance_damage_drawned = instance_create_depth(Obj_pj.middle_x_player, Obj_pj.y, -1, Obj_draw_damage_player);
+						instance_damage_drawned.ammount_damage = damage_ratio * (Obj_pj.life_steal / 100);
+						instance_damage_drawned.draw_damage_color = c_green;
+						instance_damage_drawned.effect = 0;
+					}
+					
 				}
 				Scr_handle_damage_drawned(ds_grid_get(monster_in_fight_with, i, 0), damage_ratio, c_effect);
 			}
