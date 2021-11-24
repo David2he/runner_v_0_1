@@ -5,6 +5,9 @@ effect = 0;
 text_avaible = undefined;
 text = "nul";
 
+
+size_grow_up_ratio_start = 0; 
+size_grow_up_ratio_max = 0;
 max_size_grow_up_ratio = 2;
 
 

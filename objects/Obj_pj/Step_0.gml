@@ -33,6 +33,8 @@ if(ds_grid_width(monster_in_fight_with) > 0 && first_attack){
 if(is_fighting){
 	image_speed = attack_animation_speed;
 	end_fight = true;
+	timer_0 = 5*room_speed;
+	allow_bonus_hp_decrease = false;
 	/// switch check what animation have to be played and start script of animation
 	switch(combo){
 		case 0:
@@ -113,6 +115,27 @@ if(bonus_hp > max_bonus_hp){
 	bonus_hp = max_bonus_hp;
 }
 
+if(bonus_hp > 0 && !is_fighting){
+	if(timer_0 > 0){
+		timer_0 -- ;
+	} else if(timer_0 == 0){
+		allow_bonus_hp_decrease = true;
+	}
+}
+if(allow_bonus_hp_decrease){	
+	if(timer_1 > 0){
+		timer_1 -- ;
+	} else if(timer_1 == 0){
+		if((bonus_hp - max_bonus_hp / 100) > 0){
+			bonus_hp -= max_bonus_hp / 100;
+			timer_1 = 1;
+		} else {
+			bonus_hp = 0;
+			allow_bonus_hp_decrease = false;
+		}
+		show_debug_message(bonus_hp);
+	}
+}
 
  //////// test timer
 //if(start_timer){

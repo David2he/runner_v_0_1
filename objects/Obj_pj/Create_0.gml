@@ -58,22 +58,27 @@ current_damage = damage + movement_speed/5;;
 crit_rate = 0.2;
 crit_bonus_damage = 1.5;
 first_attack = true;
-attack_animation_speed = 0.9;
+attack_animation_speed = 5;
 cut_through_the_enemies = 1.25;
 check_os = 0;
-life_steal = 20;
-
-monster_waiting_queue = ds_grid_create(0, 0);
-monster_in_fight_with = ds_grid_create(0, 0);
-
-all_monster = [];
-
+life_steal = 100;
 how_many_enemies_dies_begin = 0;
 how_many_enemies_dies_last = 5;
 
 max_enemies_stacked_in_fight = 5;
 
 
+/// EFFECT 
+effect_rate = 1;
+effect_poison_damage_tic = 1;
+effect_poison_duration = 10;
+
+
+
+monster_waiting_queue = ds_grid_create(0, 0);
+monster_in_fight_with = ds_grid_create(0, 0);
+
+all_monster = [];
 
 
 /// GAME OVER CASE	
@@ -84,5 +89,6 @@ reset_frame_death_allowed = true;
 
 
  //////// test timer
-//start_timer = false;
-//timer = 10 * room_speed;
+
+timer_0 = 5*room_speed;
+timer_1 = 0.5*room_speed;

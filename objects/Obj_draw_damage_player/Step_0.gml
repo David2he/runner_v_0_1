@@ -1,7 +1,7 @@
 if(effect == 1){
-	max_size_grow_up_ratio = 3;
+	max_size_grow_up_ratio = size_grow_up_ratio_max;
 } else {
-	max_size_grow_up_ratio = 2;
+	max_size_grow_up_ratio = size_grow_up_ratio_start;
 }
 
 
