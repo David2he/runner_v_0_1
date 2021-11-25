@@ -8,8 +8,7 @@ x = (window_get_width() / 3) - sprite_width;
 y = global.ground_level - sprite_height * (4 * global.scale_window);
 
 
-middle_x_player = x + sprite_width / 2;
-show_debug_message(middle_x_player);
+
 
 image_xscale = 4 * global.scale_window;
 image_yscale = 4 * global.scale_window;
@@ -69,11 +68,25 @@ max_enemies_stacked_in_fight = 5;
 
 
 /// EFFECT 
-effect_poison_rate = 1;
+effect_poison_rate = 0.5;
 effect_poison_damage_tic = 1;
 effect_poison_duration = 10;
 effect_poison_max_stack = 10; 
 effect_poison_current_stack = 0;
+
+effect_fire_rate = 0.5;
+effect_fire_damage_tic = 1;
+effect_fire_duration = 10;
+effect_fire_max_stack = 10; 
+effect_fire_current_stack = 0;
+
+effect_ice_rate = 0.5;
+effect_ice_damage_tic = 1;
+effect_ice_duration = 10;
+effect_ice_max_stack = 10; 
+effect_ice_current_stack = 0;
+
+
 
 
 

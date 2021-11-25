@@ -18,7 +18,7 @@ draw_text_transformed_color(xx -2, yy, string(ammount_damage), size_supp, size_s
 draw_text_transformed_color(xx -2, yy +4, string(ammount_damage), size_supp, size_supp, 0, c_black, c_black, c_black, c_black, 1);
 draw_text_transformed_color(xx +2, yy , string(ammount_damage), size_supp, size_supp, 0, c_black, c_black, c_black, c_black, 1);
 
-
+//show_debug_message(draw_damage_color);
 
 
 draw_text_transformed_color(x, y, string(ammount_damage), size_supp, size_supp, 0, draw_damage_color, draw_damage_color, draw_damage_color, draw_damage_color, 1);

@@ -9,10 +9,10 @@ if(ds_grid_width(monster_in_fight_with > 0) && !is_dead){
 	/// switch check what animation have to be played and start script of animation
 if(will_be_a_crit){
 	current_damage = (damage + curent_movement_speed/5) * crit_bonus_damage;
-	current_effect = 1;
+	current_effect = "crit_hit";
 } else {
 	current_damage = (damage + curent_movement_speed/5);
-	current_effect = 0;
+	current_effect = "normal_hit";
 }
 
 
@@ -133,7 +133,6 @@ if(allow_bonus_hp_decrease){
 			bonus_hp = 0;
 			allow_bonus_hp_decrease = false;
 		}
-		show_debug_message(bonus_hp);
 	}
 }
 
