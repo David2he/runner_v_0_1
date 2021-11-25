@@ -33,6 +33,8 @@ if(ds_grid_width(monster_in_fight_with) > 0 && first_attack){
 if(is_fighting){
 	image_speed = attack_animation_speed;
 	end_fight = true;
+	timer_0 = 5*room_speed;
+	allow_bonus_hp_decrease = false;
 	/// switch check what animation have to be played and start script of animation
 	switch(combo){
 		case 0:
@@ -74,6 +76,7 @@ if(is_fighting){
 
 if(current_hp <= 0){
 	is_dead = true;
+	current_hp = 0;
 }
 if(is_dead && !game_over){
 	if(reset_frame_death_allowed){
@@ -98,3 +101,48 @@ if(is_dead){
 if(game_over){
 	sprite_index = Spr_player_die_stuck;
 }
+
+if(current_temp_hp > current_hp){
+	current_temp_hp -= 0.4;
+}
+
+if(current_hp > max_hp){
+	bonus_hp += current_hp - max_hp;
+	current_hp = max_hp;
+}
+
+if(bonus_hp > max_bonus_hp){
+	bonus_hp = max_bonus_hp;
+}
+
+if(bonus_hp > 0 && !is_fighting){
+	if(timer_0 > 0){
+		timer_0 -- ;
+	} else if(timer_0 == 0){
+		allow_bonus_hp_decrease = true;
+	}
+}
+if(allow_bonus_hp_decrease){	
+	if(timer_1 > 0){
+		timer_1 -- ;
+	} else if(timer_1 == 0){
+		if((bonus_hp - max_bonus_hp / 100) > 0){
+			bonus_hp -= max_bonus_hp / 100;
+			timer_1 = 1;
+		} else {
+			bonus_hp = 0;
+			allow_bonus_hp_decrease = false;
+		}
+		show_debug_message(bonus_hp);
+	}
+}
+
+ //////// test timer
+//if(start_timer){
+//	if(timer > 0){
+//		show_debug_message(timer);
+//		timer -- ;
+//	} else if(timer == 0){
+//		show_debug_message("test");
+//	}
+//}
