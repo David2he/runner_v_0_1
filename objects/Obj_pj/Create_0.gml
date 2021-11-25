@@ -69,9 +69,11 @@ max_enemies_stacked_in_fight = 5;
 
 
 /// EFFECT 
-effect_rate = 1;
+effect_poison_rate = 1;
 effect_poison_damage_tic = 1;
 effect_poison_duration = 10;
+effect_poison_max_stack = 10; 
+effect_poison_current_stack = 0;
 
 
 
