@@ -47,6 +47,31 @@ function Scr_handle_damage_drawned(){
 			size_grow_up_ratio_max = 1.5;
 			y_goal_random = irandom_range(80 , 100);
 		break;
+		case "total_blocked":
+			draw_damage_color = c_gray;
+			curve = animcurve_get_channel(AnimC_damage_text, "curve_damage_player");
+			curve_x_allowed = false;
+			size_grow_up_ratio_start = 1;
+			size_grow_up_ratio_max = 1.5;
+			y_goal_random = irandom_range(80 , 100);
+		break;
+		case "blocked":
+			draw_damage_color = c_orange;
+			curve = animcurve_get_channel(AnimC_damage_text, "curve_damage_player");
+			curve_x_allowed = false;
+			size_grow_up_ratio_start = 1;
+			size_grow_up_ratio_max = 1.5;
+			y_goal_random = irandom_range(80 , 100);
+		break;
+		case "hit_taken":
+			draw_damage_color = c_white;
+			curve = animcurve_get_channel(AnimC_damage_text, "curve_damage_player");
+			curve_x_allowed = false;
+			size_grow_up_ratio_start = 1;
+			size_grow_up_ratio_max = 1.5;
+			y_goal_random = irandom_range(80 , 100);
+		break;
+		
 	}
 
 	var instance_damage_drawned = instance_create_depth(target_middle_x_y[0] ,target_middle_x_y[1], -2, Obj_draw_damage);

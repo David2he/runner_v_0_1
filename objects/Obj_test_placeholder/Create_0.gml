@@ -1,91 +1,70 @@
-// Script assets have changed for v2.3.0 see
-// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
-function Scr_apply_damage(){
+/// @function									Scr_apply_dammage_hero(hit_frames, hits_left, sprite, next_combo, damage);
+/// @param	{float}		damage_against_player	/// damage against player lol
+/// @param	{float}		player_current_hp		/// current hp of player 
+/// @param	{int}		armor					/// armor reduce damage by percentage 
+/// @param	{int}		flat_armor				/// flat_armor reduce damage in a flat way for exemple 15 armor allow player to reduce damage from 15
+/// @param {bool}		is_ignoring_armor		/// is dot, poison ...
+
+function Scr_apply_dammage_hero(){
+	var damage_against_player = argument[0];
+	var player_current_hp = argument[1];
+	var armor = argument[2];
+	var flat_armor = argument[3];
+	var is_ignoring_armor = argument[4];
 	
-	var focus_list_start = argument[0];
-	var focus_list_end = argument[1];
-	var damage = argument[2];
-	var c_effect = argument[3];
 	
-	var damage_ratio = damage;
+	var hp_bonus_swap = 0;
 	
-	
+	var calc_damage = 0;
 	var draw_damage_color = c_white;
+	var damage_to_display = 0;
+
+	
 	var can_display_text_damage = false;
 	var text_to_display = "";
-	var size_off_content_start = 1.3;
-	var size_off_content_max = 1.8;
 	
 	
+	var c_effect = "normal_hit";
 	
-	var array_effect = [
-		["poison", Obj_pj.effect_poison_rate],
-		["fire", Obj_pj.effect_fire_rate],
-		["ice", Obj_pj.effect_ice_rate],
-	];
 	
-	/// check if ds_grid is > 0 
-	///set a loop with a specific start and end (if u wants to apply damage on the first enemeis or the seond and both or all
-	/// is the loop and ds_grid have common index (if u wants to kill 2 first enemies but there is only one enemies, things like that)
-	/// with allow me to go inside the instance and modify value i want
-	if(ds_grid_width(monster_in_fight_with) > 0){
-		for(var i = focus_list_start; i <= focus_list_end; i ++){
-			
-			if(i <= ds_grid_width(monster_in_fight_with) - 1){
-				
-				/// calcul damage for each enemies in a fight queue 
-				damage_ratio = damage - (damage * (i / (focus_list_end * Obj_pj.cut_through_the_enemies)));
-				if(damage_ratio < 0){
-					damage_ratio = 0;
-				}
-				
-				with(ds_grid_get(monster_in_fight_with, i, 0)){
-					hitted = true;
-					if(damage_ratio >= current_hp){
-						current_hp -= damage_ratio;
-						is_dead = true;
-					} else {
-						current_hp -= damage_ratio;
-					}
-					
-					
-					if(Obj_pj.life_steal > 0){
-						if((Obj_pj.current_hp + damage_ratio * (Obj_pj.life_steal / 100)) >= max_hp ){
-							draw_damage_color = make_colour_rgb(2175,238,238);
-							Obj_pj.current_hp = max_hp;
-							if(Obj_pj.bonus_hp >= Obj_pj.max_bonus_hp){
-								Obj_pj.bonus_hp = Obj_pj.max_bonus_hp;
-							} else {
-								Obj_pj.bonus_hp += damage_ratio * (Obj_pj.life_steal / 100);
-							}
-						} else {
-							show_debug_message(damage_ratio * (Obj_pj.life_steal / 100));
-							draw_damage_color = c_green;
-							Obj_pj.current_hp += damage_ratio * (Obj_pj.life_steal / 100);
-						}
-			
-						var instance_damage_drawned = instance_create_depth(Obj_pj.middle_x_player, Obj_pj.y, -1, Obj_draw_damage_player);
-						instance_damage_drawned.text_avaible = can_display_text_damage;
-						instance_damage_drawned.text = text_to_display;
-						
-						instance_damage_drawned.draw_damage_color = draw_damage_color;
-						instance_damage_drawned.ammount_damage = damage_ratio * (Obj_pj.life_steal / 100);
-						instance_damage_drawned.effect = 0;
-						
-						instance_damage_drawned.size_grow_up_ratio_start = size_off_content_start
-						instance_damage_drawned.size_grow_up_ratio_max = size_off_content_max
-						
-					}	
-				}
-				Scr_handle_damage_drawned(
-					ds_grid_get(monster_in_fight_with, i, 0),
-					damage_ratio,
-					c_effect,
-					text,
-					text_avaible,
-				);
-			}
-		}	
+
+	if(!is_ignoring_armor){
+		calc_damage = ((damage_against_player) * (1 - (armor / 100))) - (flat_armor);
+		if(damage_against_player > 0 && calc_damage <= 0){
+			can_display_text_damage = true;
+			c_effect = "blocked";
+			text_to_display = "Blocked";
+		} 
+		damage_to_display = calc_damage;
+	} else {
+		calc_damage = damage_against_player;
 	}
 	
+	if(calc_damage >= player_current_hp + Obj_pj.bonus_hp) {
+		Obj_pj.is_dead = true;
+	}
+	
+	if(Obj_pj.bonus_hp > 0) {
+		hp_bonus_swap = Obj_pj.bonus_hp;
+		Obj_pj.bonus_hp -= calc_damage
+		if(Obj_pj.bonus_hp < 0){
+			Obj_pj.bonus_hp = 0;
+		}
+		calc_damage -= hp_bonus_swap;
+	}	
+	
+	if(calc_damage <= 0) {
+		damage_to_display = damage_against_player;
+		calc_damage = 0;
+	}
+	
+	Scr_handle_damage_drawned(
+		[Obj_pj.x + Obj_pj.sprite_width / 2, (Obj_pj.y - Obj_pj.sprite_height) - 15 *global.scale_window],
+		damage_to_display,
+		c_effect,
+		text_to_display,
+		can_display_text_damage,
+	);
+	
+	Obj_pj.current_hp -= calc_damage;	
 }
