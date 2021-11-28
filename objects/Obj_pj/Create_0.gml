@@ -17,11 +17,11 @@ middle_x_player = x + sprite_width / 2;
 
 
 // LIFE
-max_hp = 100;
+max_hp = 200;
 current_hp = max_hp;
 current_temp_hp = current_hp;
-armor = 10;
-flat_armor = 5;
+armor = 0;
+flat_armor = 18;
 
 bonus_hp = 0;
 allow_bonus_hp_decrease = false;
@@ -57,14 +57,14 @@ current_damage = damage + movement_speed/5;;
 crit_rate = 0.2;
 crit_bonus_damage = 1.5;
 first_attack = true;
-attack_animation_speed = 5;
+attack_animation_speed = 1.8;
 cut_through_the_enemies = 1.25;
 check_os = 0;
-life_steal = 100;
+life_steal = 50;
 how_many_enemies_dies_begin = 0;
-how_many_enemies_dies_last = 5;
+how_many_enemies_dies_last = 10;
 
-max_enemies_stacked_in_fight = 5;
+max_enemies_stacked_in_fight = 10;
 
 
 /// EFFECT 

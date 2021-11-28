@@ -103,7 +103,7 @@ if(game_over){
 }
 
 if(current_temp_hp > current_hp){
-	current_temp_hp -= 0.4;
+	current_temp_hp -= 0.8;
 }
 
 if(current_hp > max_hp){
@@ -122,6 +122,7 @@ if(bonus_hp > 0 && !is_fighting){
 		allow_bonus_hp_decrease = true;
 	}
 }
+
 if(allow_bonus_hp_decrease){	
 	if(timer_1 > 0){
 		timer_1 -- ;
@@ -135,6 +136,7 @@ if(allow_bonus_hp_decrease){
 		}
 	}
 }
+
 
  //////// test timer
 //if(start_timer){

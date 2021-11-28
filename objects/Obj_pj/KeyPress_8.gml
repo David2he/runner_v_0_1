@@ -1,4 +1,4 @@
 //current_hp -= 12;
-current_hp += 10;
+bonus_hp += 30;
 timer_0 = 5*room_speed;
 allow_bonus_hp_decrease = false;
