@@ -57,7 +57,7 @@ current_damage = damage + movement_speed/5;;
 crit_rate = 0.2;
 crit_bonus_damage = 1.5;
 first_attack = true;
-attack_animation_speed = 1.8;
+attack_animation_speed = 0.5;
 cut_through_the_enemies = 1.25;
 check_os = 0;
 life_steal = 50;
@@ -68,9 +68,9 @@ max_enemies_stacked_in_fight = 10;
 
 
 /// EFFECT 
-effect_poison_rate = 0.5;
+effect_poison_rate = 1;
 effect_poison_damage_tic = 1;
-effect_poison_duration = 10;
+effect_poison_duration = 5 * room_speed;
 effect_poison_max_stack = 10; 
 effect_poison_current_stack = 0;
 

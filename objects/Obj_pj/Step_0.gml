@@ -138,6 +138,7 @@ if(allow_bonus_hp_decrease){
 }
 
 
+
  //////// test timer
 //if(start_timer){
 //	if(timer > 0){

@@ -92,3 +92,22 @@ if(is_dead){
 	}
 		instance_destroy();
 }
+
+//for(var i = 0; i < ds_grid_width(effect_suffered); i++){
+//		switch(ds_grid_get(effect_suffered, i, 2)){
+//			case "poison":
+//				if(ds_grid_get(effect_suffered, i, 0) > 0){
+//					ds_grid_get(effect_suffered, i, 0);
+//					effect_suffered[# i, 0] -= 1;
+//				}
+//			break;
+//		}
+//}
+
+
+//if(timer_0 > 0){
+//	timer_0 -- ;
+//} else if(timer_0 == 0){
+//	allow_bonus_hp_decrease = true;
+//}
+//show_debug_message(effect_suffered);

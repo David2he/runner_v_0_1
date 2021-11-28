@@ -13,9 +13,9 @@ function Scr_apply_damage(){
 	var convert_much_hp_to_shield = 0;
 	
 	var array_effect = [
-		["poison", effect_poison_rate],
-		["fire", effect_fire_rate],
-		["ice", effect_ice_rate],
+		["poison", effect_poison_rate, effect_poison_duration]
+		//["fire", effect_fire_rate, effect_fire_duration],
+		//["ice", effect_ice_rate, effect_fire_duration],
 	];
 	
 	/// check if ds_grid is > 0 
@@ -26,7 +26,6 @@ function Scr_apply_damage(){
 		for(var i = focus_list_start; i <= focus_list_end; i ++){
 			
 			if(i <= ds_grid_width(monster_in_fight_with) - 1){
-				
 				/// calcul damage for each enemies in a fight queue 
 				damage_ratio = damage - (damage * (i / (focus_list_end * cut_through_the_enemies)));
 				if(damage_ratio < 0){
@@ -34,6 +33,17 @@ function Scr_apply_damage(){
 				}
 				
 				with(ds_grid_get(monster_in_fight_with, i, 0)){
+					for(var i = 0; i < array_length(array_effect); i++){
+						if(array_effect[i][1] >= random_range(0, 1)){
+							ds_grid_resize(effect_suffered, array_length(array_effect), array_length(array_effect[0]));
+							show_debug_message(ds_grid_width(effect_suffered));
+							show_debug_message(ds_grid_height(effect_suffered));
+							ds_grid_add(effect_suffered, ds_grid_width(effect_suffered)-1, 0, array_effect[i][0]);
+							ds_grid_add(effect_suffered, ds_grid_width(effect_suffered)-1, 1, array_effect[i][1]);
+							ds_grid_add(effect_suffered, ds_grid_width(effect_suffered)-1, 2, array_effect[i][2]);
+						}
+					}
+					
 					hitted = true;
 					if(damage_ratio >= current_hp){
 						current_hp -= damage_ratio;

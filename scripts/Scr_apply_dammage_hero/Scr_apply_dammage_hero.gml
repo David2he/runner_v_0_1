@@ -24,10 +24,7 @@ function Scr_apply_dammage_hero(){
 		
 	var c_effect = "hit_taken";
 	
-	
 
-	
-	
 	if(!is_ignoring_armor){
 		calc_damage = ((damage_against_player) * (1 - (armor / 100))) - (flat_armor);
 		

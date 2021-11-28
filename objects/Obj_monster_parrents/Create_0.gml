@@ -17,7 +17,7 @@ srite_number_start_damage = undefined;
 srite_number_end_damage = undefined;
 hit = 1;
 
-
+effect_suffered = ds_grid_create(0, 0);
 
 //sprite_die = undefined;
 
